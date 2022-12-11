@@ -18,10 +18,7 @@ async function JwtMiddleware (req, res, next) {
 			_id: decoded.sub,
 			token: token
 		});
-		
-		if(!user) {
-			return response401(res);
-		}
+		if(!user) return response401(res);
 
 		// verification step 3
 		if(decoded.aud !== ip) {

@@ -6,6 +6,14 @@ const response401 = (res) => {
 	})
 }
 
+const response403 = (res) => {
+	return res.status(403).json({
+		success: false,
+		code: 403,
+		message: 'Forbidden'
+	})
+}
+
 const response500 = (res) => {
 	return res.status(500).json({
 		success: false,
@@ -24,6 +32,7 @@ const response404 = (res) => {
 
 module.exports = {
 	response401,
+	response403,
 	response404,
 	response500
 }

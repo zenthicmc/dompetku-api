@@ -12,7 +12,7 @@ async function show(req, res) {
 		if(data.length <= 0) return response404(res)
 
 		return res.json({
-			succes: true,
+			success: true,
 			code: 200,
 			message: "Users fetched successfully",
 			data: data
