@@ -35,7 +35,7 @@ async function show(req, res) {
 async function detail(req, res) {
 	try {
 		const data = await User.findById(req.params.id)
-      return res.json({
+		return res.json({
 			success: true,
 			code: 200,
 			message: "User Detail fetched successfully",
