@@ -126,6 +126,7 @@ async function update(req, res) {
 				}
 			})
 		})
+		
 	} catch (err) {
 		return res.status(404).json({
 			success: false,

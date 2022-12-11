@@ -6,7 +6,8 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const path = require('path')
 
-const apiRoutes = require('./src/routes/api')
+const UserRoutes = require('./src/routes/UserRoutes')
+const AuthRoutes = require('./src/routes/AuthRoutes')
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -22,8 +23,9 @@ app.use(cors({
    allowedHeaders: "Content-Type, Authorization, X-Requested-With, Accept"
 }))
 
-// apiRoutes
-app.use("/api/", apiRoutes)
+// Routes
+app.use("/api/auth", AuthRoutes)
+app.use("/api/user", UserRoutes)
 
 app.listen(port, () => {
    console.log(`Listening at http://localhost:${port}`)
