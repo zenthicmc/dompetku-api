@@ -4,17 +4,12 @@ require('../config/database')
 const User = require('../models/User')
 const bcrypt = require('bcryptjs')
 const { validationResult } = require('express-validator');
+const { response404, response500 } = require('../helpers/response')
 
 async function show(req, res) {
 	try {
 		const data = await User.find()
-		if(data.length <= 0) {
-			return res.status(404).json({
-				success: false,
-				code: 404,
-				message: 'No data found'
-			})
-		}
+		if(data.length <= 0) return response404(res)
 
 		return res.json({
 			succes: true,
@@ -24,17 +19,15 @@ async function show(req, res) {
 		})
 
 	} catch (err) {
-		return res.status(500).json({
-			success: false,
-			code: 500,
-			message: "Internal Server Error"
-		})
+		return response500(res)
 	}
 }
 
 async function detail(req, res) {
 	try {
 		const data = await User.findById(req.params.id)
+		if(!data) return response404(res)
+
 		return res.json({
 			success: true,
 			code: 200,
@@ -43,11 +36,7 @@ async function detail(req, res) {
       })
 
 	} catch (err) {
-		return res.status(404).json({
-			success: false,
-			code: 404,
-			message: "User not found with that id"
-		})
+		return response404(res)
 	}
 }
 
@@ -90,11 +79,7 @@ async function store(req, res) {
 		})
 
 	} catch (err) {
-		return res.status(500).json({
-			success: false,
-			code: 500,
-			message: "Internal Server Error"
-		})
+		return response500(res)
 	}
 }
 
@@ -126,13 +111,9 @@ async function update(req, res) {
 				}
 			})
 		})
-		
+
 	} catch (err) {
-		return res.status(404).json({
-			success: false,
-			code: 404,
-			message: "User not found with that id"
-		})
+		return response404(res)
 	}
 }
 
@@ -149,11 +130,7 @@ async function destroy(req, res) {
 		})
 
 	} catch (err) {
-		return res.status(404).json({
-			success: false,
-			code: 404,
-			message: "User not found with that id"
-		})
+		return response404(res)
 	}
 }
 

@@ -5,6 +5,7 @@ const User = require('../models/User')
 const bcrypt = require('bcryptjs')
 const { validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
+const { response500 } = require('../helpers/response')
 
 async function login(req, res) {
 	try {
@@ -64,11 +65,7 @@ async function login(req, res) {
 		})
 
 	} catch (err) {
-		return res.status(500).json({
-			success: false,
-			code: 500,
-			message: err.message,
-		})
+		return response500(res);
 	}
 }
 

@@ -6,6 +6,8 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const path = require('path')
 
+const JwtMiddleware = require("./src/middlewares/JwtMiddleware.js");
+
 const UserRoutes = require('./src/routes/UserRoutes')
 const AuthRoutes = require('./src/routes/AuthRoutes')
 
@@ -25,7 +27,7 @@ app.use(cors({
 
 // Routes
 app.use("/api/auth", AuthRoutes)
-app.use("/api/user", UserRoutes)
+app.use("/api/user", JwtMiddleware, UserRoutes)
 
 app.listen(port, () => {
    console.log(`Listening at http://localhost:${port}`)
