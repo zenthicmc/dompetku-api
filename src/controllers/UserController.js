@@ -134,7 +134,6 @@ async function destroy(req, res) {
 	}
 }
 
-
 module.exports = {
 	show,
 	detail,

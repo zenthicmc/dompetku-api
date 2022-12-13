@@ -8,6 +8,7 @@ const path = require('path')
 
 const JwtMiddleware = require("./src/middlewares/JwtMiddleware.js");
 
+const HomeRoutes = require('./src/routes/HomeRoutes')
 const UserRoutes = require('./src/routes/UserRoutes')
 const AuthRoutes = require('./src/routes/AuthRoutes')
 
@@ -26,6 +27,7 @@ app.use(cors({
 }))
 
 // Routes
+app.use("/", HomeRoutes)
 app.use("/api/auth", AuthRoutes)
 app.use("/api/user", JwtMiddleware, UserRoutes)
 
