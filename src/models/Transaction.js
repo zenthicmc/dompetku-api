@@ -23,6 +23,9 @@ const TransactionSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
+	catatan: {
+		type: String,
+	},
 	status: {
 		type: String,
 		default: 'Pending',
