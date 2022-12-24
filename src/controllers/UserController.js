@@ -64,6 +64,7 @@ async function store(req, res) {
 			nohp: req.body.nohp,
 			kelamin: req.body.kelamin,
 			password: hashedPassword,
+			saldo: 50000,
 		}
 
 		User.create(data, (err, user) => {
