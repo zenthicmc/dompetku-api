@@ -1,36 +1,45 @@
-const response401 = (res) => {
+const response400 = (res, msg) => {
+	return res.status(400).json({
+		success: false,
+		code: 400,
+		message: msg ? msg : 'Bad Request'
+	})
+}
+
+const response401 = (res, msg) => {
 	return res.status(401).json({
 		success: false,
 		code: 401,
-		message: 'Unauthorized'
+		message: msg ? msg : 'Unauthorized'
 	})
 }
 
-const response403 = (res) => {
+const response403 = (res, msg) => {
 	return res.status(403).json({
 		success: false,
 		code: 403,
-		message: 'Forbidden'
+		message: msg ? msg : 'Forbidden'
 	})
 }
 
-const response500 = (res) => {
+const response500 = (res, msg) => {
 	return res.status(500).json({
 		success: false,
 		code: 500,
-		message: 'Internal Server Error'
+		message: msg ? msg : 'Internal Server Error'
 	})
 }
 
-const response404 = (res) => {
+const response404 = (res, msg) => {
 	return res.status(404).json({
 		success: false,
 		code: 404,
-		message: 'Not Found'
+		message: msg ? msg : 'Not Found'
 	})
 }
 
 module.exports = {
+	response400,
 	response401,
 	response403,
 	response404,

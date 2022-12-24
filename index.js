@@ -11,6 +11,7 @@ const JwtMiddleware = require("./src/middlewares/JwtMiddleware.js");
 const HomeRoutes = require('./src/routes/HomeRoutes')
 const UserRoutes = require('./src/routes/UserRoutes')
 const AuthRoutes = require('./src/routes/AuthRoutes')
+const TransactionRoutes = require('./src/routes/TransactionRoutes')
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -30,6 +31,7 @@ app.use(cors({
 app.use("/", HomeRoutes)
 app.use("/api/auth", AuthRoutes)
 app.use("/api/user", JwtMiddleware, UserRoutes)
+app.use("/api/transaction", JwtMiddleware, TransactionRoutes)
 
 app.listen(port, () => {
    console.log(`Listening at http://localhost:${port}`)

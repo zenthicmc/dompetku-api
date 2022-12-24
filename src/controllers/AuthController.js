@@ -44,12 +44,12 @@ async function login(req, res) {
 			iss: 'Dompetku',
 			sub: user._id,
 			aud: ip,
-			exp: new Date().setDate(new Date().getDate() + 7),
+			exp: new Date().setDate(new Date().getDate() + 14),
 			iat: new Date().getTime(),
 		}
 
-		// generate token
-		const token = jwt.sign(payload, process.env.JWT_KEY, { algorithm: 'HS256' });
+		// generate token to 14 days
+		const token = jwt.sign(payload, process.env.JWT_KEY, { algorithm: 'HS512' });
 
 		// update token in database
 		user.token = token;
@@ -60,6 +60,9 @@ async function login(req, res) {
 			code: 200,
 			message: 'Login success',
 			data: {
+				id: user._id,
+				name: user.name,
+				nohp: user.nohp,
 				token: token
 			}
 		})

@@ -4,7 +4,8 @@ require('../config/database')
 const User = require('../models/User')
 const bcrypt = require('bcryptjs')
 const { validationResult } = require('express-validator');
-const { response404, response500 } = require('../helpers/response')
+const { response403, response404, response500 } = require('../helpers/response')
+const CheckOwner = require('../middlewares/CheckOwner')
 
 async function show(req, res) {
 	try {
@@ -86,6 +87,7 @@ async function store(req, res) {
 async function update(req, res) {
 	try {
 		const oldData = await User.findById(req.params.id)
+
 		const data = {
 			name: req.body.name || oldData.name,
 			email: req.body.email || oldData.email,
@@ -119,7 +121,9 @@ async function update(req, res) {
 
 async function destroy(req, res) {
 	try {
-		const data = await User.findByIdAndDelete(req.params.id)
+		const data = await User.findById(req.params.id)
+		await data.remove()
+
 		return res.json({
 			success: true,
 			code: 200,
