@@ -18,6 +18,11 @@ const UserSchema = new mongoose.Schema({
 		required: true,
 		unique: true,
 	},
+	kelamin: {
+		type: String,
+		required: true,
+		default: 'Male',
+	},
 	saldo: {
 		type: Number,
 		default: 0,

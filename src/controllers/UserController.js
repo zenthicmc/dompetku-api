@@ -62,6 +62,7 @@ async function store(req, res) {
 			name: req.body.name,
 			email: req.body.email,
 			nohp: req.body.nohp,
+			kelamin: req.body.kelamin,
 			password: hashedPassword,
 		}
 
@@ -146,7 +147,7 @@ async function destroy(req, res) {
 async function getprofile(req, res) {
 	try {
 		const token = decodeJwt(req)
-		const user = await User.findById(token.sub).select('name email nohp saldo createdAt')
+		const user = await User.findById(token.sub).select('name email nohp kelamin saldo createdAt')
 		
 		const transactions = await Transaction
 			.find({user_id: token.sub})
