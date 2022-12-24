@@ -1,16 +1,21 @@
 "use strict"
 
 require('../config/database')
+const Transaction = require('../models/Transaction')
 const User = require('../models/User')
 const bcrypt = require('bcryptjs')
 const { validationResult } = require('express-validator');
-const { response403, response404, response500 } = require('../helpers/response')
+const { response400, response403, response404, response500 } = require('../helpers/response')
 const CheckOwner = require('../middlewares/CheckOwner')
+const decodeJwt = require('../helpers/decodeJwt')
+const axios = require('axios')
+const hmacSHA256 = require('crypto-js/hmac-sha256'); 
+const hex = require('crypto-js/enc-hex');
 
 async function show(req, res) {
 	try {
 		const data = await User.find()
-		if(data.length <= 0) return response404(res)
+		if(data.length <= 0) return response404(res, "Users not found")
 
 		return res.json({
 			success: true,
@@ -27,7 +32,7 @@ async function show(req, res) {
 async function detail(req, res) {
 	try {
 		const data = await User.findById(req.params.id)
-		if(!data) return response404(res)
+		if(!data) return response404(res, "User with that id is not found")
 
 		return res.json({
 			success: true,
@@ -138,10 +143,38 @@ async function destroy(req, res) {
 	}
 }
 
+async function getprofile(req, res) {
+	try {
+		const token = decodeJwt(req)
+		const user = await User.findById(token.sub).select('name email nohp saldo createdAt')
+		
+		const transactions = await Transaction
+			.find({user_id: token.sub})
+			.sort({created_at: -1})
+			.limit(3)
+
+		user.transaction = transactions
+
+		return res.json({
+			success: true,
+			code: 200,
+			message: "User Profile fetched successfully",
+			data: {
+				user,
+				transactions
+			}
+		})
+
+	} catch (err) {
+		return console.log(err)
+	}
+}
+
 module.exports = {
 	show,
 	detail,
 	store,
 	update,
-	destroy
+	destroy,
+	getprofile
 }
