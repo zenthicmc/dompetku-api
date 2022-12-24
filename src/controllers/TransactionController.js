@@ -33,7 +33,7 @@ async function show(req, res) {
 		return res.json({
 			success: true,
 			code: 200,
-			message: "Your transactions fetchead successfully",
+			message: "Your transactions fetched successfully",
 			data: data
 		})
 
