@@ -38,7 +38,7 @@ async function store(req, res) {
 		if(user.saldo < req.body.amount) return response400(res, "Saldo anda tidak cukup")
 
 		data.receiver_id = receiver._id
-		if(body.catatan) data.catatan = req.body.catatan
+		if(req.body.catatan) data.catatan = req.body.catatan
 		const transfer = Transaction.create(data)
 		
 		if(transfer) {
