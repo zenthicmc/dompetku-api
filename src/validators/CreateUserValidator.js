@@ -19,6 +19,19 @@ const CreateUserValidator = [
 		.isLength({ min: 6 })
 		.withMessage('No HP must be at least 6 characters long'),
 
+	body('kelamin')
+		.notEmpty()
+		.withMessage('Kelamin is required'),
+
+	body('kelamin')
+		.custom((value) => {
+			const kelamin = ['Male', 'Female']
+			if (!kelamin.includes(value)) {
+				throw new Error('Kelamin must be Male or Female')
+			}
+			return true
+		}),
+
 	body('password')
 		.notEmpty()
 		.withMessage('Password is required')
