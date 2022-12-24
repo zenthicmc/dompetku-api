@@ -9,9 +9,9 @@ const response400 = (res, msg) => {
 const response401 = (res, msg) => {
 	return res.status(401).json({
 		success: false,
-		code: 401,
+		code: 401, 
 		message: msg ? msg : 'Unauthorized',
-		description: 'Please add your Bearer token in the header'
+		description: 'Please add your Bearer token in the Authorization header'
 	})
 }
 
