@@ -16,13 +16,24 @@ const MD5 = require('crypto-js/md5');
 async function show(req, res) {
 	try {
 		const token = decodeJwt(req)
-		const data = await Transaction.find({ user_id: token.sub })
-		if(data.length <= 0) return response404(res)
+		let data
+
+		if(req.query.type == "Deposit") data = await Transaction.find({ user_id: token.sub, type: "Deposit" })
+		else if(req.query.type == "Transfer") data = await Transaction.find({ user_id: token.sub, type: "Transfer" })
+		else if(req.query.type == "Withdraw") data = await Transaction.find({ user_id: token.sub, type: "Withdraw" })
+		else if(req.query.type == "Topup") data = await Transaction.find({ user_id: token.sub, type: "Topup" })
+		else data = await Transaction.find({ user_id: token.sub })
+
+		if(req.query.status == "Pending") data = data.filter(item => item.status == "Pending")
+		else if(req.query.status == "Success") data = data.filter(item => item.status == "Success")
+		else if(req.query.status == "Failed") data = data.filter(item => item.status == "Failed")
 		
+		if(data.length <= 0) return response404(res)
+
 		return res.json({
 			success: true,
 			code: 200,
-			message: "Your transactions fetched successfully",
+			message: "Your transactions fetchead successfully",
 			data: data
 		})
 
