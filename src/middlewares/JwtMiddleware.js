@@ -16,14 +16,8 @@ async function JwtMiddleware (req, res, next) {
 		// verification step 2
 		const user = await User.findOne({
 			_id: decoded.sub,
-			token: token
 		});
 		if(!user) return response401(res);
-
-		// verification step 3
-		if(decoded.aud !== ip) {
-			return response401(res);
-		}
 
 		next();
 		
