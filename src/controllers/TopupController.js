@@ -31,7 +31,6 @@ async function store(req, res) {
 		}
 
 		const user = await User.findById(token.sub)
-		if(user.saldo < req.body.amount) return response400(res, "Saldo anda tidak cukup")
 
 		const api_key = process.env.IAK_API_KEY
 		const api_user = process.env.IAK_USERNAME
@@ -52,6 +51,7 @@ async function store(req, res) {
 			}
 		})
 
+		if(user.saldo < topup.data.data.price) return response400(res, "Saldo anda tidak cukup")
 		if(topup.data.data.message == "PROCESS") {
 			data.status = "Pending"
 			data.reference = ref_id
