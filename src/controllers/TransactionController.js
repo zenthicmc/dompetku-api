@@ -28,8 +28,6 @@ async function show(req, res) {
 		else if(req.query.status == "Success") data = data.filter(item => item.status == "Success")
 		else if(req.query.status == "Failed") data = data.filter(item => item.status == "Failed")
 		
-		if(data.length <= 0) return response404(res)
-
 		return res.json({
 			success: true,
 			code: 200,
