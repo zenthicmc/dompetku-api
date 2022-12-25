@@ -60,7 +60,7 @@ async function login(req, res) {
 			code: 200,
 			message: 'Login success',
 			data: {
-				id: user._id,
+				_id: user._id,
 				name: user.name,
 				nohp: user.nohp,
 				token: token
