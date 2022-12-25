@@ -13,6 +13,7 @@ const UserRoutes = require('./src/routes/UserRoutes')
 const AuthRoutes = require('./src/routes/AuthRoutes')
 const TransactionRoutes = require('./src/routes/TransactionRoutes')
 const PaymentRoutes = require('./src/routes/PaymentRoutes')
+const ProductRoutes = require('./src/routes/ProductRoutes')
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -34,6 +35,7 @@ app.use("/api/auth", AuthRoutes)
 app.use("/api/user", JwtMiddleware, UserRoutes)
 app.use("/api/transaction", JwtMiddleware, TransactionRoutes)
 app.use("/api/payment", JwtMiddleware, PaymentRoutes)
+app.use("/api/product", JwtMiddleware, ProductRoutes)
 
 app.listen(port, () => {
    console.log(`Listening at http://localhost:${port}`)
