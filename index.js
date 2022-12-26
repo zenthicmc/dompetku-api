@@ -5,6 +5,7 @@ const dotenv = require('dotenv')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const path = require('path')
+const inject = require('@vercel/analytics');
 
 const JwtMiddleware = require("./src/middlewares/JwtMiddleware.js");
 
@@ -18,6 +19,7 @@ const CallbackRoutes = require('./src/routes/CallbackRoutes')
 
 const app = express()
 const port = process.env.PORT || 3000
+inject()
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
