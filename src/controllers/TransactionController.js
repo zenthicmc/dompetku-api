@@ -18,11 +18,11 @@ async function show(req, res) {
 		const token = decodeJwt(req)
 		let data
 
-		if(req.query.type == "Deposit") data = await Transaction.find({ user_id: token.sub, type: "Deposit" })
-		else if(req.query.type == "Transfer") data = await Transaction.find({ user_id: token.sub, type: "Transfer" })
-		else if(req.query.type == "Withdraw") data = await Transaction.find({ user_id: token.sub, type: "Withdraw" })
-		else if(req.query.type == "Topup") data = await Transaction.find({ user_id: token.sub, type: "Topup" })
-		else data = await Transaction.find({ user_id: token.sub })
+		if(req.query.type == "Deposit") data = await Transaction.find({ user_id: token.sub, type: "Deposit" }).sort({createdAt: -1})
+		else if(req.query.type == "Transfer") data = await Transaction.find({ user_id: token.sub, type: "Transfer" }).sort({createdAt: -1})
+		else if(req.query.type == "Withdraw") data = await Transaction.find({ user_id: token.sub, type: "Withdraw" }).sort({createdAt: -1})
+		else if(req.query.type == "Topup") data = await Transaction.find({ user_id: token.sub, type: "Topup" }).sort({createdAt: -1})
+		else data = await Transaction.find({ user_id: token.sub }).sort({createdAt: -1})
 
 		if(req.query.status == "Pending") data = data.filter(item => item.status == "Pending")
 		else if(req.query.status == "Success") data = data.filter(item => item.status == "Success")
