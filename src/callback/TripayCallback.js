@@ -46,7 +46,7 @@ async function handle(req, res) {
 	const status = json.status.toUpperCase()
 
 	if (json.is_closed_payment === 1) {
-		const result = await Transaction.findOne({ reference: uniqueRef, status: 'Pending' })
+		const result = await Transaction.findOne({ merchant_ref: uniqueRef, status: 'Pending' })
 
 		if (!result) {
 			return res.status(400).json({

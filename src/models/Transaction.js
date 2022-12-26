@@ -15,6 +15,9 @@ const TransactionSchema = new mongoose.Schema({
 	reference : {
 		type: String,
 	},
+	merchant_ref : {
+		type: String,
+	},
 	amount: {
 		type: Number,
 		required: true,

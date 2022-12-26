@@ -70,6 +70,7 @@ async function store(req, res) {
 
 			if(response.data.success == true) {
 				data.reference = response.data.data.reference
+				data.merchant_ref = merchant_ref
 				const transaction = await Transaction.create(data)
 				return res.json({
 					success: true,
