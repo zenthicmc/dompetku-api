@@ -22,7 +22,7 @@ async function handle(req, res) {
 		return res.status(401).json({
 			success: false,
 			code: 401,
-			message: 'Invalid IP address'
+			message: `Invalid IP address (${ip})`
 		});
 	}
 
