@@ -18,7 +18,7 @@ async function handle(req, res) {
 	const privateKey = process.env.TRIPAY_PRIVATE_KEY
 	const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 
-	if(ip !== '95.111.203.85' || ip !== '2a04:3543:1000:2310:ac92:4cff:fe87:63f9') {
+	if(ip != '95.111.203.85' || ip != '2a04:3543:1000:2310:ac92:4cff:fe87:63f9') {
 		return res.status(401).json({
 			success: false,
 			code: 401,
