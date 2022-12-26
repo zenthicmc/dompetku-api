@@ -55,7 +55,7 @@ async function handle(req, res) {
 					result.save()
 					break;
 				case 'UNPAID':
-					result.status = 'Unpaid'
+					result.status = 'Pending'
 					result.save()
 					break;
 				case 'EXPIRED':
