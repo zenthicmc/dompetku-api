@@ -16,13 +16,13 @@ async function handle(req, res) {
 	const signature = hmacSHA256(json, apiKey).toString(hex);
 	const callbackSignature = req.headers['x-callback-signature']
 	const privateKey = process.env.TRIPAY_PRIVATE_KEY
+	const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 
-
-	if(callbackSignature !== signature) {
-		return res.status(400).json({
+	if(ip !== '95.111.200.230' || ip !== '2a04:3543:1000:2310:ac92:4cff:fe87:63f9') {
+		return res.status(401).json({
 			success: false,
-			code: 400,
-			message: 'Invalid signature'
+			code: 401,
+			message: 'Invalid IP address'
 		});
 	}
 
@@ -81,8 +81,6 @@ async function handle(req, res) {
 			success: true
 		});
 	}
-
-	console.log(signature)
 }
 
 module.exports = {
