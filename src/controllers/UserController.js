@@ -152,7 +152,7 @@ async function getprofile(req, res) {
 		
 		const transactions = await Transaction
 			.find({user_id: token.sub})
-			.sort({created_at: -1})
+			.sort({createdAt: -1})
 			.limit(3)
 
 		user.transaction = transactions
