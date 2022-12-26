@@ -45,11 +45,11 @@ async function store(req, res) {
 				'amount': req.body.amount,
 				'customer_name': user.name,
 				'customer_email': user.email,
-				'customer_phone': user.phone,
+				'customer_phone': user.nohp,
 				'order_items': [
 					{
-						'sku': 'PRODUK1',
-						'name': 'Nama Produk 1',
+						'sku': 'SKU-1',
+						'name': 'Dompetku - Deposit',
 						'price':  req.body.amount,
 						'quantity': 1,
 						'product_url': 'https://tokokamu.com/product/nama-produk-1',
