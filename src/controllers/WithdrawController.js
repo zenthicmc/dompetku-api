@@ -29,6 +29,7 @@ async function store(req, res) {
 			amount: req.body.amount,
 			type: "Withdraw",
 			status: "Pending",
+			icon: "https://i.ibb.co/5kyV2N6/Withdraw.png",
 		}
 
 		const user = await User.findById(token.sub)

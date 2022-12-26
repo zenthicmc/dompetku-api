@@ -33,6 +33,9 @@ const TransactionSchema = new mongoose.Schema({
 		type: String,
 		default: 'Pending',
 	},
+	icon: {
+		type: String,
+	},
 	createdAt: {
 		type: Date,
 		default: Date.now,

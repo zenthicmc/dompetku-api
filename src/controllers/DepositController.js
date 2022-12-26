@@ -28,6 +28,7 @@ async function store(req, res) {
 			user_id: token.sub,
 			amount: req.body.amount,
 			type: "Deposit",
+			icon: "https://i.ibb.co/Fx0RMpr/Deposit.png",
 		}
 
 		try {

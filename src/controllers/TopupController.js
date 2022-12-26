@@ -28,6 +28,7 @@ async function store(req, res) {
 		const data = {
 			user_id: token.sub,
 			type: "Topup",
+			icon: "https://i.ibb.co/PmwZvcb/Topup-1.png",
 		}
 
 		const user = await User.findById(token.sub)

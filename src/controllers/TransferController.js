@@ -29,6 +29,7 @@ async function store(req, res) {
 			amount: req.body.amount,
 			status: "Success",
 			type: "Transfer",
+			icon: "https://i.ibb.co/wzpTmRz/Transfer.png"
 		}
 
 		const user = await User.findById(token.sub)
