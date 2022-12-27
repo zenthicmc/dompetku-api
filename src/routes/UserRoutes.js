@@ -6,6 +6,7 @@ const userController = require('../controllers/UserController')
 const CreateUserValidator = require('../validators/CreateUserValidator')
 
 router.get('/getprofile', userController.getprofile)
+router.get('/getstats', userController.getStats)
 
 router.get('/', userController.show)
 router.get('/:id', userController.detail)

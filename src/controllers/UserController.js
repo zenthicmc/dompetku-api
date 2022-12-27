@@ -154,24 +154,7 @@ async function getprofile(req, res) {
 			.find({user_id: token.sub})
 			.sort({createdAt: -1})
 			.limit(3)
-
-		const uangMasuk = await Transaction
-			.find({ receiver_id: token.sub, status: 'Success' })
-			
-		const uangKeluar = await Transaction
-			.find({ user_id: token.sub, status: 'Success' })
-
-		const totalUangMasuk = uangMasuk.reduce((total, item) => {
-			return total + item.amount
-		}, 0)
-
-		const totalUangKeluar = uangKeluar.reduce((total, item) => {
-			return total + item.amount
-		}, 0)
-
-		user.uangMasuk = totalUangMasuk
-		user.uangKeluar = totalUangKeluar
-
+		
 		return res.json({
 			success: true,
 			code: 200,
@@ -187,11 +170,41 @@ async function getprofile(req, res) {
 	}
 }
 
+async function getStats(req, res) {
+	try {
+		const token = decodeJwt(req)
+		const uangMasuk = await Transaction.find({receiver_id: token.sub, status: 'Success'})
+		const uangKeluar = await Transaction.find({user_id: token.sub, status: 'Success'})
+
+		const totalUangMasuk = uangMasuk.reduce((total, item) => {
+			return total + item.amount
+		}, 0)
+
+		const totalUangKeluar = uangKeluar.reduce((total, item) => {
+			return total + item.amount
+		}, 0)
+		
+		return res.json({
+			success: true,
+			code: 200,
+			message: "User Stats fetched successfully",
+			data: {
+				uangMasuk: totalUangMasuk,
+				uangKeluar: totalUangKeluar
+			}
+		})
+
+	} catch (err) {
+		return console.log(err)
+	}
+}
+
 module.exports = {
 	show,
 	detail,
 	store,
 	update,
 	destroy,
-	getprofile
+	getprofile,
+	getStats
 }
