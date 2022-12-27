@@ -155,7 +155,22 @@ async function getprofile(req, res) {
 			.sort({createdAt: -1})
 			.limit(3)
 
-		user.transaction = transactions
+		const uangMasuk = await Transaction
+			.find({ receiver_id: token.sub, status: 'Success' })
+			
+		const uangKeluar = await Transaction
+			.find({ user_id: token.sub, status: 'Success' })
+
+		const totalUangMasuk = uangMasuk.reduce((total, item) => {
+			return total + item.amount
+		}, 0)
+
+		const totalUangKeluar = uangKeluar.reduce((total, item) => {
+			return total + item.amount
+		}, 0)
+
+		user.uangMasuk = totalUangMasuk
+		user.uangKeluar = totalUangKeluar
 
 		return res.json({
 			success: true,
