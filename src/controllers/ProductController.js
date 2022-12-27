@@ -17,6 +17,7 @@ const listrik = require('../data/listrik.json')
 const game = require('../data/game.json')
 const voucher = require('../data/voucher.json')
 const emoney = require('../data/emoney.json')
+const pulsa = require('../data/pulsa.json')
 
 async function show(req, res) {
 	try {
@@ -27,6 +28,7 @@ async function show(req, res) {
 		else if(req.params.id == "game") data = game.data
 		else if(req.params.id == "voucher") data = voucher.data
 		else if(req.params.id == "emoney") data = emoney.data
+		else if(req.params.id == "pulsa") data = pulsa.data
 		else return response404(res, "Product type not found")
 
 		return res.status(200).json({
@@ -72,7 +74,6 @@ async function detail(req, res) {
 		return response500(res)
 	}
 }
-
 
 module.exports = {
 	show,
