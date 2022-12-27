@@ -16,6 +16,7 @@ const internet = require('../data/internet.json')
 const listrik = require('../data/listrik.json')
 const game = require('../data/game.json')
 const voucher = require('../data/voucher.json')
+const emoney = require('../data/emoney.json')
 
 async function show(req, res) {
 	try {
@@ -25,6 +26,7 @@ async function show(req, res) {
 		else if(req.params.id == "listrik") data = listrik.data
 		else if(req.params.id == "game") data = game.data
 		else if(req.params.id == "voucher") data = voucher.data
+		else if(req.params.id == "emoney") data = emoney.data
 		else return response404(res, "Product type not found")
 
 		return res.status(200).json({
