@@ -15,7 +15,6 @@ const response401 = (res, msg) => {
 	})
 }
 
-
 const response403 = (res, msg) => {
 	return res.status(403).json({
 		success: false,
