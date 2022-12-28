@@ -231,7 +231,6 @@ async function recentUser(req, res) {
 async function getUserByPhone(req, res) {
 	try {
 		const user = await User.find({nohp: req.params.phone}).select('name email nohp image')
-		console.log(req.params.phone)
 
 		return res.json({
 			success: true,
