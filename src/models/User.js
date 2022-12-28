@@ -35,6 +35,10 @@ const UserSchema = new mongoose.Schema({
 		type: String,
 		default: 'member',
 	},
+	image: {
+		type: String,
+		default: 'https://i.ibb.co/D9Gb6N4/male-removebg-preview.png',
+	},
 	createdAt: {
 		type: Date,
 		default: Date.now,
