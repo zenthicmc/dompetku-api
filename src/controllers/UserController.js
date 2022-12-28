@@ -199,6 +199,26 @@ async function getStats(req, res) {
 	}
 }
 
+
+async function recentUser(req, res) {
+	try {
+		const users = await User.find()
+			.sort({createdAt: -1})
+			.select('name email nohp image')
+			.limit(7)
+
+		return res.json({
+			success: true,
+			code: 200,
+			message: "Recents user fetched successfully",
+			data: users
+		})
+
+	} catch (err) {
+		return response500(res)
+	}
+}
+
 module.exports = {
 	show,
 	detail,
@@ -206,5 +226,6 @@ module.exports = {
 	update,
 	destroy,
 	getprofile,
-	getStats
+	getStats,
+	recentUser
 }

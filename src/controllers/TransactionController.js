@@ -134,27 +134,7 @@ async function detail(req, res) {
 	}
 }
 
-async function recents(req, res) {
-	try {
-		const users = await User.find()
-			.select('name email nohp image')
-			.sort({createdAt: -1})
-			.limit(7)
-
-		return res.json({
-			success: true,
-			code: 200,
-			message: "Recents fetched successfully",
-			data: users
-		})
-
-	} catch (err) {
-		console.log(err)
-	}
-}
-
 module.exports = {
 	show,
 	detail,
-	recents
 }
