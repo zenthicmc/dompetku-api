@@ -37,7 +37,7 @@ const UserSchema = new mongoose.Schema({
 	},
 	image: {
 		type: String,
-		default: 'https://i.ibb.co/4TyLx9M/foto-Profil.jpg',
+		default: 'https://i.ibb.co/BT3DC0q/photo-Profile.webp',
 	},
 	createdAt: {
 		type: Date,
