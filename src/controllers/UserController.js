@@ -199,7 +199,6 @@ async function getStats(req, res) {
 	}
 }
 
-
 async function recentUser(req, res) {
 	try {
 		const users = await User.find()
@@ -229,6 +228,23 @@ async function recentUser(req, res) {
 	}
 }
 
+async function getUserByPhone(req, res) {
+	try {
+		const user = await User.find({nohp: req.params.phone}).select('name email nohp image')
+		console.log(req.params.phone)
+
+		return res.json({
+			success: true,
+			code: 200,
+			message: "Detail user fetched successfully",
+			data: user
+		})
+
+	} catch (err) {
+		return response500(res)
+	}
+}
+
 module.exports = {
 	show,
 	detail,
@@ -237,5 +253,6 @@ module.exports = {
 	destroy,
 	getprofile,
 	getStats,
-	recentUser
+	recentUser,
+	getUserByPhone
 }
