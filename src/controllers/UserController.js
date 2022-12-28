@@ -201,8 +201,12 @@ async function getStats(req, res) {
 
 async function recentUser(req, res) {
 	try {
+		const token = decodeJwt(req)
+
+		// get all user except current user
 		const users = await User.find()
 			.sort({createdAt: -1})
+			.where('_id').ne(token.sub)
 			.select('name email nohp image')
 			.limit(7)
 
