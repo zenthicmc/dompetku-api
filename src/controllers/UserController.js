@@ -211,7 +211,13 @@ async function recentUser(req, res) {
 			success: true,
 			code: 200,
 			message: "Recents user fetched successfully",
-			data: users
+			data: {
+				_id: users._id,
+				name: users.name.split(' ')[0],
+				email: users.email,
+				nohp: users.nohp,
+				image: users.image
+			}
 		})
 
 	} catch (err) {
