@@ -148,7 +148,7 @@ async function destroy(req, res) {
 async function getprofile(req, res) {
 	try {
 		const token = decodeJwt(req)
-		const user = await User.findById(token.sub).select('name email nohp kelamin saldo createdAt')
+		const user = await User.findById(token.sub).select('name email nohp kelamin saldo image createdAt')
 		
 		const transactions = await Transaction
 			.find({user_id: token.sub})
