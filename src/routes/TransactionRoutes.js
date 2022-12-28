@@ -15,7 +15,7 @@ const createTopupValidator = require('../validators/CreateTopupValidator')
 // Deposit
 router.get('/', transactionController.show)
 router.get('/:id', transactionController.detail)
-router.get('/recents', transactionController.recents')
+router.get('/recents', transactionController.recents)
 router.post('/deposit', createDepositValidator, depositController.store)
 router.post('/transfer', createTransferValidator, transferController.store)
 router.post('/withdraw', createWithdrawValidator, withdrawController.store)
