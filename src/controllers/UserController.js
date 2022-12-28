@@ -207,17 +207,21 @@ async function recentUser(req, res) {
 			.select('name email nohp image')
 			.limit(7)
 
+		const newUsers = users.map(user => {
+			return {
+				_id: user._id,
+				name: user.name.split(' ')[0].toLowerCase(),
+				email: user.email,
+				nohp: user.nohp,
+				image: user.image
+			}
+		})
+
 		return res.json({
 			success: true,
 			code: 200,
 			message: "Recents user fetched successfully",
-			data: {
-				_id: users._id,
-				name: users.name.split(' ')[0],
-				email: users.email,
-				nohp: users.nohp,
-				image: users.image
-			}
+			data: newUsers
 		})
 
 	} catch (err) {
