@@ -78,7 +78,9 @@ async function store(req, res) {
 					code: 200,
 					message: "Transaction created successfully",
 					data: {
+						_id: transaction._id,
 						reference: response.data.data.reference,
+						merchant_ref: response.data.data.merchant_ref
 					}
 				})
 			} else {
