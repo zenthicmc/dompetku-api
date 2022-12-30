@@ -53,6 +53,11 @@ async function handle(req, res) {
 				case 'PAID':
 					result.status = 'Success'
 					result.save()
+
+					const user = await User.findOne({ _id: result.user_id })
+					user.saldo = user.saldo + result.amount
+					user.save()
+					
 					break;
 				case 'UNPAID':
 					result.status = 'Pending'
