@@ -174,7 +174,7 @@ async function getStats(req, res) {
 	try {
 		const token = decodeJwt(req)
 		const uangMasuk = await Transaction.find({receiver_id: token.sub, status: 'Success'})
-		const uangKeluar = await Transaction.find({user_id: token.sub, status: 'Success'})
+		const uangKeluar = await Transaction.find({user_id: token.sub, status: 'Success', type: {$ne: 'Deposit'}})
 
 		const totalUangMasuk = uangMasuk.reduce((total, item) => {
 			return total + item.amount
