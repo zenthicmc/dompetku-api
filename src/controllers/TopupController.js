@@ -72,7 +72,7 @@ async function store(req, res) {
 		}
 
 	} catch (err) {
-		console.log(err)
+		return response500(res, err)
 	}
 }
 		
