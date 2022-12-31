@@ -5,7 +5,7 @@ const User = require('../models/User')
 const bcrypt = require('bcryptjs')
 const { validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
-const { response500 } = require('../helpers/response')
+const { response401, response404, response500 } = require('../helpers/response')
 
 async function login(req, res) {
 	try {
@@ -24,20 +24,12 @@ async function login(req, res) {
 		})
 
 		if(!user) {
-			return res.status(404).send({
-				success: false,
-				code: 404,
-				message: "You're account are not registered"
-			});
+			return response404(res, 'Your account is not registered');
 		}
 
 		const isPasswordValid = await bcrypt.compare(req.body.password, user.password);
 		if(!isPasswordValid) {
-			return res.status(401).send({
-				success: false,
-				code: 401,
-				message: 'Incorrect password'
-			});
+			return response401(res, 'Wrong password');
 		}
 
 		const payload = {
