@@ -27,6 +27,7 @@ async function store(req, res) {
 		const data = {
 			user_id: token.sub,
 			amount: req.body.amount,
+			rekening: req.body.rekening,
 			type: "Withdraw",
 			status: "Pending",
 			icon: "https://i.ibb.co/5kyV2N6/Withdraw.png",
