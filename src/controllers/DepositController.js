@@ -49,8 +49,8 @@ async function store(req, res) {
 				'customer_phone': user.nohp,
 				'order_items': [
 					{
-						'sku': 'SKU-1',
-						'name': 'Dompetku - Deposit',
+						'sku': 'Deposit',
+						'name': 'Dompetku',
 						'price':  req.body.amount,
 						'quantity': 1,
 						'product_url': 'https://tokokamu.com/product/nama-produk-1',
