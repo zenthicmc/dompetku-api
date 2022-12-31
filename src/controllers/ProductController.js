@@ -62,6 +62,8 @@ async function detail(req, res) {
 		})
 
 		if(!price.data.data.pricelist) return response404(res, "Product code not found")
+		// sort from cheapest price to highest price
+		price.data.data.pricelist.sort((a, b) => a.product_price - b.product_price)		
 
 		return res.status(200).json({
 			success: true,
