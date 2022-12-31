@@ -29,6 +29,9 @@ const TransactionSchema = new mongoose.Schema({
 	catatan: {
 		type: String,
 	},
+	rekening: {
+		type: String,
+	},
 	status: {
 		type: String,
 		default: 'Pending',
