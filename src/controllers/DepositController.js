@@ -24,6 +24,9 @@ async function store(req, res) {
 				});
 			}
 
+		if(req.body.amount < 10000) return response400(res, "Minimal deposit Rp. 10.000")
+		if(req.body.amount > 1000000) return response400(res, "Maksimal deposit Rp. 1.000.000")
+
 		const data = {
 			user_id: token.sub,
 			receiver_id: token.sub,

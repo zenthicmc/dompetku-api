@@ -207,7 +207,7 @@ async function recentUser(req, res) {
 		const users = await User.find()
 			.sort({createdAt: -1})
 			.where('_id').ne(token.sub)
-			.select('name email nohp image')
+			.select('name email nohp image kelamin')
 			.limit(7)
 
 		const newUsers = users.map(user => {
@@ -234,7 +234,8 @@ async function recentUser(req, res) {
 
 async function getUserByPhone(req, res) {
 	try {
-		const user = await User.findOne({nohp: req.params.phone}).select('name email nohp image')
+		const user = await User.findOne({nohp: req.params.phone}).select('name email nohp image kelamin')
+		if(!user)return response404(res, "User not found")
 
 		return res.json({
 			success: true,
