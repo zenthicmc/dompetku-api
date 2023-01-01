@@ -60,7 +60,8 @@ async function detail(req, res) {
 				data: tripay.data.data,
 			})
 		} else if(data.type == "Transfer") {
-			const receiver = await User.findById(data.receiver_id)
+			const receiver = await User.findById(data.receiver_id).select('-password -createdAt -updatedAt -__v -token -role -saldo')
+			const sender = await User.findById(data.user_id).select('-password -createdAt -updatedAt -__v -token -role -saldo')
 
 			return res.json({
 				success: true,
@@ -74,12 +75,8 @@ async function detail(req, res) {
             	type: data.type,
             	status: data.status,
             	createdAt: data.createdAt,
-					receiver: {
-						_id: receiver._id,
-						name: receiver.name,
-						email: receiver.email,
-						nohp: receiver.nohp,
-					}
+					receiver: receiver,
+					sender: sender
 				}
 			})
 		} else if(data.type == "Topup") {
