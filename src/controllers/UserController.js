@@ -235,7 +235,7 @@ async function recentUser(req, res) {
 async function getUserByPhone(req, res) {
 	try {
 		const user = await User.findOne({nohp: req.params.phone}).select('name email nohp image kelamin')
-		if(!user)return response404(res, "User not found")
+		if(!user)return response404(res, "User with that phone is not found")
 
 		return res.json({
 			success: true,
