@@ -60,7 +60,7 @@ async function store(req, res) {
 			const notification = Notification.create({
 				user_id: token.sub,
 				receiver_id: receiver._id,
-				title: `Transfer diterima dari ${name}`,
+				title: `Transfer diterima`,
 				desc: `Anda menerima transfer sebesar Rp ${amount} dari ${user.name}.`,
 			})
 
