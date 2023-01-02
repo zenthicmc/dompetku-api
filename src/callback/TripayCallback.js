@@ -64,7 +64,7 @@ async function handle(req, res) {
 					const notification = Notification.create({
 						user_id: user._id,
 						receiver_id: user._id,
-						title: `Deposit berhasil`,
+						title: `Deposit Berhasil`,
 						desc: `Deposit anda sebesar Rp ${amount} telah berhasil diverifikasi.`,
 					})
 					

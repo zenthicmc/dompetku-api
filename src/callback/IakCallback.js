@@ -33,7 +33,7 @@ async function handle(req, res) {
 			const notification = Notification.create({
 				user_id: user._id,
 				receiver_id: user._id,
-				title: `Topup berhasil`,
+				title: `Topup Berhasil`,
 				desc: `Topup anda sebesar Rp ${amount} telah berhasil diverifikasi.`,
 			})
 
