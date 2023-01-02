@@ -11,6 +11,7 @@ const decodeJwt = require('../helpers/decodeJwt')
 const axios = require('axios')
 const hmacSHA256 = require('crypto-js/hmac-sha256'); 
 const hex = require('crypto-js/enc-hex');
+const Notification = require('../models/Notification')
 
 async function store(req, res) {
 	try {
@@ -52,6 +53,16 @@ async function store(req, res) {
 			
 			user.save()
 			receiver.save()
+
+			const name = user.name.split(" ")[0]
+			const amount = req.body.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+
+			const notification = Notification.create({
+				user_id: token.sub,
+				receiver_id: receiver._id,
+				title: `Transfer diterima dari ${name}`,
+				desc: `Anda menerima transfer sebesar Rp ${amount} dari ${user.name}.`,
+			})
 
 			return res.json({
 				success: true,

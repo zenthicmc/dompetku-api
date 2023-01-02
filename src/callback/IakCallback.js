@@ -27,6 +27,15 @@ async function handle(req, res) {
 			const user = await User.findOne({ _id: transaction.user_id })
 			user.saldo = user.saldo - transaction.amount
 			user.save()
+
+			const amount = transaction.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+			const notification = Notification.create({
+				user_id: user._id,
+				receiver_id: user._id,
+				title: `Topup berhasil`,
+				desc: `Topup anda sebesar Rp ${amount} telah berhasil diverifikasi.`,
+			})
+
 		} else {
 			transaction.status = 'Failed'
 			transaction.save()

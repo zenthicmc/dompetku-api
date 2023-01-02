@@ -3,6 +3,7 @@
 require('../config/database')
 const User = require('../models/User')
 const Transaction = require('../models/Transaction')
+const Notification = require('../models/Notification')
 const bcrypt = require('bcryptjs')
 const { validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
@@ -57,6 +58,15 @@ async function handle(req, res) {
 					const user = await User.findOne({ _id: result.user_id })
 					user.saldo = user.saldo + result.amount
 					user.save()
+
+					const amount = result.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+
+					const notification = Notification.create({
+						user_id: user._id,
+						receiver_id: user._id,
+						title: `Deposit berhasil`,
+						desc: `Deposit anda sebesar Rp ${amount} telah berhasil diverifikasi.`,
+					})
 					
 					break;
 				case 'UNPAID':

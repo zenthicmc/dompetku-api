@@ -127,7 +127,7 @@ async function detail(req, res) {
 		})
 
 	} catch (err) {
-		console.log(err)
+		return response500(res)
 	}
 }
 
