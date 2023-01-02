@@ -3,6 +3,7 @@
 require('../config/database')
 const User = require('../models/User')
 const Transaction = require('../models/Transaction')
+const Notification = require('../models/Notification')
 const bcrypt = require('bcryptjs')
 const { validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
