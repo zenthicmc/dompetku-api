@@ -99,6 +99,8 @@ async function update(req, res) {
 			name: req.body.name || oldData.name,
 			email: req.body.email || oldData.email,
 			nohp: req.body.nohp 	|| oldData.nohp,
+			image: req.body.image || oldData.image,
+			kelamin: req.body.kelamin || oldData.kelamin,
 			password: req.body.password || oldData.password
 		}
 
