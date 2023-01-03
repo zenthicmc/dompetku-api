@@ -49,7 +49,7 @@ async function store(req, res) {
 			const amount = req.body.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
 			const notification = Notification.create({
 				user_id: token.sub,
-				receiver_id: receiver._id,
+				receiver_id: token.sub,
 				title: `Withdraw Dalam Proses`,
 				desc: `Withdraw sebesar Rp. ${amount} sedang dalam proses. Silahkan cek secara berkala status withdraw anda.`,
 			})
