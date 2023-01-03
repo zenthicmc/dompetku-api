@@ -67,6 +67,9 @@ async function store(req, res) {
 			saldo: 50000,
 		}
 
+		if(req.body.kelamin == "Male") data.image = "https://i.ibb.co/BT3DC0q/photo-Profile.webp"
+		else data.image = "https://i.ibb.co/3C0yHkh/female-removebg-preview.webp"
+
 		User.create(data, (err, user) => {
 			if(err) {
 				return res.status(400).json({

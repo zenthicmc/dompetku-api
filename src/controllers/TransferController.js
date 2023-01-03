@@ -54,9 +54,7 @@ async function store(req, res) {
 			user.save()
 			receiver.save()
 
-			const name = user.name.split(" ")[0]
 			const amount = req.body.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-
 			const notification = Notification.create({
 				user_id: token.sub,
 				receiver_id: receiver._id,

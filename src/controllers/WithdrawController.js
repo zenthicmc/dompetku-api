@@ -3,6 +3,7 @@
 require('../config/database')
 const Transaction = require('../models/Transaction')
 const User = require('../models/User')
+const Notification = require('../models/Notification')
 const bcrypt = require('bcryptjs')
 const { validationResult } = require('express-validator');
 const { response400, response403, response404, response500 } = require('../helpers/response')
@@ -29,6 +30,7 @@ async function store(req, res) {
 
 		const data = {
 			user_id: token.sub,
+			receiver_id: token.sub,
 			amount: req.body.amount,
 			rekening: req.body.rekening,
 			type: "Withdraw",
@@ -43,6 +45,14 @@ async function store(req, res) {
 		if(withdraw) {
 			user.saldo = parseInt(user.saldo) - parseInt(req.body.amount)
 			user.save()
+
+			const amount = req.body.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+			const notification = Notification.create({
+				user_id: token.sub,
+				receiver_id: receiver._id,
+				title: `Withdraw Dalam Proses`,
+				desc: `Withdraw sebesar Rp. ${amount} sedang dalam proses. Silahkan cek secara berkala status withdraw anda.`,
+			})
 
 			return res.json({
 				success: true,
