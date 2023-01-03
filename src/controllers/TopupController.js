@@ -27,6 +27,7 @@ async function store(req, res) {
 
 		const data = {
 			user_id: token.sub,
+			receiver_id: token.sub,
 			type: "Topup",
 			icon: "https://i.ibb.co/PmwZvcb/Topup-1.png",
 		}
