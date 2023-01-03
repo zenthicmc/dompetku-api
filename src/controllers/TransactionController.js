@@ -119,6 +119,8 @@ async function detail(req, res) {
 					"Accept-Encoding": "gzip,deflate,compress",
 				}
 			})
+			const receiver = await User.findById(data.receiver_id).select('-password -createdAt -updatedAt -__v -token -role -saldo')
+			const sender = await User.findById(data.user_id).select('-password -createdAt -updatedAt -__v -token -role -saldo')
 
 			let status;
 			if(topup.data.data.message == "PROCESS") status = "Pending"
@@ -139,6 +141,8 @@ async function detail(req, res) {
 					type: data.type,
 					status: status,
 					createdAt: data.createdAt,
+					receiver: receiver,
+					sender: sender
 				}
 			})
 		}
